@@ -25,14 +25,14 @@ void bubbleSort(T* ele, size_t n) {
 
 template <typename T>
 void insertionSort(T* ele, size_t n) {
-   for(int i = 1 ; i < n; ++i){ //for [1,n), insert into left sorted array
+   for(int i = 1 ; i < n; ++i){ //for [1,n), insert_back into left sorted array
        //insertion
        int key = ele[i];
        for(int j = i - 1; j >= 0; --j){
            if(ele[j] > key)
                ele[j+1] = ele[j];    //move all greater elements right toward
            else {
-               ele[j+1] = key;      //insert the key and break
+               ele[j+1] = key;      //insert_back the key and break
                break;
            }
        }

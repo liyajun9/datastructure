@@ -133,7 +133,7 @@ public:
          * 3.find / search
          * 4.disorder
      * write
-         * 1.insert
+         * 1.insert_back
          * 2.remove
          * 3.deduplicate / unique
          * 5.sort
@@ -250,7 +250,7 @@ public:
         return hi - lo;
     }
 
-    Rank insert(const T& e){    //insert back
+    Rank insert_back(const T& e){    //insert_back back
         insert(_size, e);
     }
 

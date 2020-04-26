@@ -6,7 +6,7 @@
 int main() {
 //    Vector<int> vec;
 //    for(int i = 0; i  < 10; ++i){
-//        vec.insert(rand()%10);
+//        vec.insert_back(rand()%10);
 //    }
 //    vec.sort();
 //    vec.unique();
