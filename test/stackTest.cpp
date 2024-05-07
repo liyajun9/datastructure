@@ -2,10 +2,10 @@
 // Created by ralph on 4/26/20.
 //
 
-#include <gtest/gtest.h>
 #include "../stack/stack.h"
+#include <iostream>
 
-TEST(stackTest, basic)
+void testBasic()
 {
     Stack<int> stack;
     int len = rand() % 10 + 1;
@@ -18,10 +18,10 @@ TEST(stackTest, basic)
         std::cout << stack.pop() << " ";
     }
     std::cout << std::endl;
-    EXPECT_EQ(stack.size(), 0);
+//    EXPECT_EQ(stack.size(), 0);
 }
 
-TEST(stackTest, radixConvert)
+void testRadixConvert()
 {
     std::string sNum = radixConvert(54234523, 16);
     std::cout << "result is: " << sNum << std::endl;

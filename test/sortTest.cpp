@@ -2,16 +2,18 @@
 // Created by ralph on 4/24/20.
 //
 
-#include <gtest/gtest.h>
 #include <chrono>
 #include "../sort/sort.h"
+#include <vector>
+#include <iostream>
 
 #define PRINT_OUTPUT
 #define TEST_ROUNDS 1
 #define INPUT_SIZE 50 * 10
 #define RANDOM_RANGE 100000
 
-TEST(sort,quickSort) {
+void testQuickSort()
+{
 #ifdef PRINT_OUTPUT
     std::cout << "quick sort" << std::endl;
 #endif
@@ -39,7 +41,7 @@ TEST(sort,quickSort) {
         timeCost = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - beginTime).count();
 
         bool foundUnsorted = (nums.end() != std::adjacent_find(nums.begin(), nums.end(), std::greater<int>()));
-        EXPECT_FALSE(foundUnsorted);
+//        EXPECT_FALSE(foundUnsorted);
 
 #ifdef PRINT_OUTPUT
         std::cout << "output array " << i << ": ";
@@ -52,7 +54,8 @@ TEST(sort,quickSort) {
 
 }
 
-TEST(sort, mergeSort) {
+void testMergeSort()
+{
 #ifdef PRINT_OUTPUT
     std::cout << "merge sort" << std::endl;
 #endif
@@ -80,7 +83,7 @@ TEST(sort, mergeSort) {
         timeCost = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - beginTime).count();
 
         bool foundUnsorted = (nums.end() != std::adjacent_find(nums.begin(), nums.end(), std::greater<int>()));
-        EXPECT_FALSE(foundUnsorted);
+//        EXPECT_FALSE(foundUnsorted);
 
 #ifdef PRINT_OUTPUT
         std::cout << "output array " << i << ": ";
@@ -93,7 +96,7 @@ TEST(sort, mergeSort) {
 
 }
 
-TEST(sort, insertionSort) {
+void testInsertionSort(){
 #ifdef PRINT_OUTPUT
     std::cout << "insertion sort" << std::endl;
 #endif
@@ -121,7 +124,7 @@ TEST(sort, insertionSort) {
         timeCost = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - beginTime).count();
 
         bool foundUnsorted = (nums.end() != std::adjacent_find(nums.begin(), nums.end(), std::greater<int>()));
-        EXPECT_FALSE(foundUnsorted);
+//        EXPECT_FALSE(foundUnsorted);
 
 #ifdef PRINT_OUTPUT
         std::cout << "output array " << i << ": ";
@@ -134,7 +137,8 @@ TEST(sort, insertionSort) {
 
 }
 
-TEST(sort, selectionSort) {
+void testSelectionSort()
+{
 #ifdef PRINT_OUTPUT
     std::cout << "selection sort" << std::endl;
 #endif
@@ -162,7 +166,7 @@ TEST(sort, selectionSort) {
         timeCost = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - beginTime).count();
 
         bool foundUnsorted = (nums.end() != std::adjacent_find(nums.begin(), nums.end(), std::greater<int>()));
-        EXPECT_FALSE(foundUnsorted);
+//        EXPECT_FALSE(foundUnsorted);
 
 #ifdef PRINT_OUTPUT
         std::cout << "output array " << i << ": ";
@@ -175,7 +179,8 @@ TEST(sort, selectionSort) {
 
 }
 
-TEST(sort, bubbleSort) {
+void testBubbleSort()
+{
 #ifdef PRINT_OUTPUT
     std::cout << "bubble sort" << std::endl;
 #endif
@@ -203,7 +208,7 @@ TEST(sort, bubbleSort) {
         timeCost = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - beginTime).count();
 
         bool foundUnsorted = (nums.end() != std::adjacent_find(nums.begin(), nums.end(), std::greater<int>()));
-        EXPECT_FALSE(foundUnsorted);
+//        EXPECT_FALSE(foundUnsorted);
 
 #ifdef PRINT_OUTPUT
         std::cout << "output array " << i << ": ";

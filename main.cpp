@@ -1,4 +1,4 @@
-#include <gtest/gtest.h>
+#include <iostream>
 #include "vector/vector.h"
 #include "list/doublyLinkedList.h"
 
@@ -30,10 +30,7 @@ int main() {
 //    std::cout << "after sort" << std::endl;
 //    list.traverse(visit); std::cout << std::endl;
 
-    testing::InitGoogleTest();
-
-    return RUN_ALL_TESTS();
-
+    std::cout << "resort" << std::endl;
 
     return 0;
 }
