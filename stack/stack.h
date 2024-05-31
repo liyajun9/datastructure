@@ -6,6 +6,7 @@
 #define DATASTRUCTURE_STACK_H
 
 #include "../vector/vector.h"
+#include <iostream>
 
 template <typename T>
 class Stack : public Vector<T>{

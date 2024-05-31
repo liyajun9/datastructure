@@ -11,14 +11,18 @@ add_executable(datastructure
         stack/stack.h
         sort/sort.h
         sort/search.h
-        queue/queue.h
+        queue/listQueue.h
         test.h
         list/doublyLinkedList.h list/doublyLinkedListTest.cpp
         skipList/skipList.cpp skipList/skipList.h
         test/sortTest.cpp
         test/searchTest.cpp
         test/stackTest.cpp
-        stl/binary_heap.hpp priority_queue/maxHeap.h priority_queue/maxPriorityQueue.h priority_queue/maxPriorityQueue.h priority_queue/maxPriorityQueue.h priority_queue/maxPriorityQueue.h priority_queue/maxHeapTest.cpp)
+        stl/binary_heap.hpp
+        priority_queue/maxHeap.h
+        priority_queue/maxHblt.h
+        priority_queue/maxPriorityQueue.h
+        priority_queue/Test.cpp)
 
 add_precompiled_header(datastructure pch.h FORCEINCLUDE)
 target_link_libraries(datastructure PUBLIC -pthread)

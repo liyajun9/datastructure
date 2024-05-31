@@ -1,37 +1,21 @@
-//
-// Created by ralph on 4/26/20.
-//
+#ifndef TESTMAXHEAP_QUEUE_H
+#define TESTMAXHEAP_QUEUE_H
+#include <iostream>
 
-#ifndef DATASTRUCTURE_QUEUE_H
-#define DATASTRUCTURE_QUEUE_H
+namespace lyj
+{
+    template<class T>
+    class queue
+    {
+    public:
+        virtual ~queue() {}
+        virtual bool empty() const  = 0;
+        virtual int size() const = 0;
+        virtual T& front() const = 0;
+        virtual T& back() const  = 0;
+        virtual void pop() = 0;
+        virtual void push(const T& theElement) = 0;
+    };
+}
 
-#include <functional>
-#include "../list/doublyLinkedList.h"
-
-template <typename T>
-class Queue : public List<T>{
-public:
-    void enqueue(const T& e) {
-        this->insertAsLast(e);
-    }
-
-    T dequeue() {
-        return this->remove(this->first());
-    }
-
-    T& front() {
-        return this->first()->m_data;
-    }
-};
-
-template <typename T>
-void RoundRobin(const Queue<T>& queue, const std::function<void(T)>& func) {
-    while(true){
-        T ele = queue.dequeue();
-        func(ele);
-        queue.enqueue(ele);
-    }
-};
-
-
-#endif //DATASTRUCTURE_QUEUE_H
+#endif //TESTMAXHEAP_QUEUE_H
