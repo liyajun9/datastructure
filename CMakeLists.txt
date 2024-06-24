@@ -22,7 +22,7 @@ add_executable(datastructure
         priority_queue/maxHeap.h
         priority_queue/maxHblt.h
         priority_queue/maxPriorityQueue.h
-        priority_queue/Test.cpp)
+        priority_queue/Test.cpp winnerTree/Test.cpp winnerTree/player.h)
 
 add_precompiled_header(datastructure pch.h FORCEINCLUDE)
 target_link_libraries(datastructure PUBLIC -pthread)

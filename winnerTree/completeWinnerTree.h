@@ -2,6 +2,7 @@
 #define TEST_COMPLETEWINNERTREE_H
 #include "winnerTree.h"
 #include <exception>
+#include <iostream>
 
 namespace lyj
 {
@@ -10,6 +11,7 @@ namespace lyj
     {
     public :
         CompleteWinnerTree(T *thePlayer, int theNumberOfPlayers)
+        : lowExt(0), offset(0), tree(NULL), numberOfPlayers(0), player(NULL)
         {
             tree = NULL;
             initialize(thePlayer, theNumberOfPlayers);
@@ -46,7 +48,7 @@ namespace lyj
         //create winner tree for thePlayer[1:numberOfPlayers]
         int n = theNumberOfPlayers;
         if (n < 2)
-            throw std::exception("must have at least 2 players");
+            throw std::exception();
 
         player = thePlayer;
         numberOfPlayers = n;
@@ -67,18 +69,20 @@ namespace lyj
             play((offset + i) / 2, i - 1, i);
         }
 
-        //handle remaining external nodes
+        //选手成单数时, 需要将成单数的外部结点与最后一个内部结点比赛
         if (n % 2 == 1)
         {
             //special case for odd n, play internal and external node
             //last node: tree[n-1], first external node(is the next node of lowExt): lowExt + 1
             play(n/2, tree[n-1], lowExt+1);
+            i = lowExt + 3; //跳到下一对选手的右选手处
         }
         else
         {
-            i = lowExt + 2;
+            i = lowExt + 2; //跳到下一对选手的右选手处
         }
 
+        //如果还有与内部结点在同一层的外部结点(成双数的), 为他们进行比赛
         //play matches for the 2nd lowest-level external nodes
         //i is left-most remaining external node
         for(; i <= n; i += 2)
@@ -88,26 +92,31 @@ namespace lyj
     }
 
     //在父结点parent处开始比赛. 约定:若父结点为右孩子时会自动触发比赛,直至根结点或父结点不再是右孩子(因为只有左孩子时,是无需进行比赛的),该函数用于初始化
+    /*
+     * parent:    parent在树中的索引
+     * leftChild: 左孩子的key值(ie.选手编号)
+     * rightChild:右孩子的key值
+     */
     template<class T>
-    void completeWinnerTree<T>::play(int parent, int leftChild, int rightChild)
+    void CompleteWinnerTree<T>::play(int parent, int leftChild, int rightChild)
     {
         //play matches beginning at tree[parent]
-        tree[parent] = (player[leftChild]) <= player[rightChild]) ? leftChild : rightChild;
+        tree[parent] = player[leftChild] <= player[rightChild] ? leftChild : rightChild;
 
         while (parent % 2 == 1 && parent > 1) //右孩子且不为根结点
         {
-            tree[parent/2] = (player[tree[parent-1]] <= player[tree[parent]]) ? player[tree[parent-1]] : player[tree[parent]]);
+            tree[parent/2] = (player[tree[parent-1]] <= player[tree[parent]]) ? tree[parent-1] : tree[parent];
             parent /= 2;
         }
     }
 
     template<class T>
-    void completeWinnerTree<T>::rePlay(int thePlayer)
+    void CompleteWinnerTree<T>::rePlay(int thePlayer)
     {
         //replay matches for player thePlayer
         int n = numberOfPlayers;
         if (thePlayer <= 0 || thePlayer > n)
-            throw std::exception("Player index is illegal");
+            throw std::exception();
 
         int matchNode,  // node where next match is to be played
             leftChild,  // left child of matchNode
@@ -117,7 +126,7 @@ namespace lyj
         if (thePlayer <= lowExt) //在最底层
         {
             matchNode = (offset + thePlayer) / 2;
-            leftChild = tree[2*matchNode];
+            leftChild = 2*matchNode - offset;
             rightChild = leftChild + 1;
         }
         else //在倒数第2层
@@ -135,25 +144,26 @@ namespace lyj
             }
         }
 
-        tree[matchNode] = player[leftChild] <= player[rightChild]) ? leftChild : rightchild;
+        tree[matchNode] = player[leftChild] <= player[rightChild] ? leftChild : rightChild;
 
         //往上重赛,但要先处理一种特殊情况: 父结点为最后一个内部结点,且为左孩子,此时其右孩子为选手(其编号无法在树中查询).其它情况下,左右孩子均在树中.
         //special case for second match
         if (matchNode == n - 1 && n%2 == 1)
         {
             matchNode /= 2; //move to parent
-            tree[matchNode] = (player[tree[n - 1]]) <= player[lowExt + 1]) ? tree(n-1) : lowExt + 1;
+            tree[matchNode] = (player[tree[n - 1]] <= player[lowExt + 1]) ? tree[n-1] : lowExt + 1;
         }
 
         //play remaining matches.沿着父结点一直往上,直到根结点
+        matchNode /= 2;
         for (; matchNode >= 1; matchNode /= 2)
         {
-            tree[matchNode] = (player[tree[2*matchNode]] <= player[tree[2*matchNode]]) ? tree[2*matchNode] : tree[2*matchNode + 1];
+            tree[matchNode] = (player[tree[2*matchNode]] <= player[tree[2*matchNode + 1]]) ? tree[2*matchNode] : tree[2*matchNode + 1];
         }
     }
 
     template<class T>
-    void completeWinnerTree<T>::output() const
+    void CompleteWinnerTree<T>::output() const
     {
         std::cout << "number of players = " << numberOfPlayers << " lowExt = " << lowExt << " offset = " << offset << std::endl;
         std::cout << "complete winner tree pointers are " << std::endl;
