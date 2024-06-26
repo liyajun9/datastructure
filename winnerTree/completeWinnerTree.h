@@ -125,17 +125,17 @@ namespace lyj
         //find first match node and its children
         if (thePlayer <= lowExt) //在最底层
         {
-            matchNode = (offset + thePlayer) / 2;
-            leftChild = 2*matchNode - offset;
-            rightChild = leftChild + 1;
+            matchNode = (offset + thePlayer) / 2; //父结点根据offset和选手编号计算出
+            leftChild = 2*matchNode - offset;     //左选手编号根据父结点和offset计算出
+            rightChild = leftChild + 1;           //右选手编号根据左选手编号推导出
         }
         else //在倒数第2层
         {
-            matchNode = (thePlayer-lowExt + n-1) / 2;
+            matchNode = (thePlayer-lowExt + n-1) / 2;  //父结点根据lowExt和选手编号计算出
             if (2*matchNode == n-1) //内部结点成单数的情况
             {
-                leftChild = tree[2*matchNode];
-                rightChild = thePlayer;
+                leftChild = tree[2*matchNode];  //左选手编号在内部结点
+                rightChild = thePlayer;         //右选手就是当前选手
             }
             else //内部结点是双数,此时左右孩子都不在树中,无法在树中查询出左右孩子的值,需要去计算它们在选手中的编号
             {
