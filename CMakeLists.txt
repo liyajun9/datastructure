@@ -14,7 +14,7 @@ add_executable(datastructure
         queue/listQueue.h
         test.h
         list/doublyLinkedList.h list/doublyLinkedListTest.cpp
-        skipList/skipList.cpp skipList/skipList.h
+        skipList/skipList.h
         test/sortTest.cpp
         test/searchTest.cpp
         test/stackTest.cpp
