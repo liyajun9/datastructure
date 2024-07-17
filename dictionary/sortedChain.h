@@ -135,6 +135,7 @@ namespace lyj
         {
             out << currentNode->element.first << " " << currentNode->element.second << "   ";
         }
+        out << std::endl;
     }
 
     template<class K, class E>
