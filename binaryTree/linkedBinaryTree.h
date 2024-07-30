@@ -6,6 +6,13 @@
 #include "binaryTreeNode.h"
 //#include <booster>
 
+template<class K, class E>
+std::ostream& operator<<(std::ostream& out, const std::pair<K, E>& x)
+{
+    out << x.first << " " << x.second;
+    return out;
+}
+
 namespace lyj
 {
     template<class T>
@@ -230,7 +237,7 @@ namespace lyj
         }
     };
 
-//    template<typename T>
+    //    template<typename T>
 //    void (*linkedBinaryTree<T>::visit)(binaryTreeNode<T>*) = linkedBinaryTree<T>::output;
     template<typename T>
     void (*linkedBinaryTree<T>::visit)(binaryTreeNode<T>*) = nullptr;
