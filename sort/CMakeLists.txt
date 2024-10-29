@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.15)
-project(TestFibonacci)
+project(TestSort)
 
 set(CMAKE_CXX_STANDARD 11)
 
 add_executable(${PROJECT_NAME}
-        Test.cpp ../sort/TestSort.cpp ../sort/sortMethod.h)
+        TestSort.cpp)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC -pthread)
